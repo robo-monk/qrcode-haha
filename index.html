@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scanned QR Code</title>
+<style>
+    body, html {
+        height: 100%;
+        margin: 0;
+    }
+    body {
+        background-color: #00f; /* Bright blue background */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
+    @keyframes flashColors {
+        0% { color: red; }
+        25% { color: yellow; }
+        50% { color: green; }
+        75% { color: blue; }
+        100% { color: red; }
+    }
+    .flashing-text {
+        font-size: 2em;
+        font-family: 'Courier New', monospace; /* Mimicking hacking aesthetic */
+        animation: flashColors 2s infinite; /* Flashing colors */
+        position: absolute;
+    }
+</style>
+</head>
+<body>
+
+<div class="flashing-text">You scanned it, didn't you??</div>
+
+<script>
+    const text = document.querySelector('.flashing-text');
+    let x = 0, y = 0;
+    let dx = 2, dy = 2;
+    
+    function moveText() {
+        x += dx;
+        y += dy;
+        
+        if (x <= 0 || x + text.clientWidth >= window.innerWidth) dx = -dx;
+        if (y <= 0 || y + text.clientHeight >= window.innerHeight) dy = -dy;
+        
+        text.style.transform = `translate(${x}px, ${y}px)`;
+        
+        requestAnimationFrame(moveText);
+    }
+    
+    moveText(); // Start the animation
+</script>
+
+</body>
+</html>
+
