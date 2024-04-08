@@ -15,6 +15,7 @@
         justify-content: center;
         align-items: center;
         overflow: hidden;
+        position: relative;
     }
     @keyframes flashColors {
         0% { color: red; }
@@ -33,21 +34,29 @@
 </head>
 <body>
 
-<div class="flashing-text">You scanned it, didn't you??</div>
+<div id="flashingText" class="flashing-text">You scanned it, didn't you??</div>
 
 <script>
-    const text = document.querySelector('.flashing-text');
+    const text = document.getElementById('flashingText');
     let x = 0, y = 0;
     let dx = 2, dy = 2;
+    const speed = 1; // Adjust speed as necessary
     
     function moveText() {
-        x += dx;
-        y += dy;
+        const rect = text.getBoundingClientRect();
         
-        if (x <= 0 || x + text.clientWidth >= window.innerWidth) dx = -dx;
-        if (y <= 0 || y + text.clientHeight >= window.innerHeight) dy = -dy;
+        if (x + rect.width >= window.innerWidth || x <= 0) {
+            dx = -dx;
+        }
+        if (y + rect.height >= window.innerHeight || y <= 0) {
+            dy = -dy;
+        }
         
-        text.style.transform = `translate(${x}px, ${y}px)`;
+        x += dx * speed;
+        y += dy * speed;
+        
+        text.style.left = x + 'px';
+        text.style.top = y + 'px';
         
         requestAnimationFrame(moveText);
     }
