@@ -15,7 +15,6 @@
         justify-content: center;
         align-items: center;
         overflow: hidden;
-        position: relative;
     }
     @keyframes flashColors {
         0% { color: red; }
@@ -29,34 +28,36 @@
         font-family: 'Courier New', monospace; /* Mimicking hacking aesthetic */
         animation: flashColors 2s infinite; /* Flashing colors */
         position: absolute;
+				top: 0;
+				left: 0;
     }
 </style>
 </head>
 <body>
 
-<div id="flashingText" class="flashing-text">You scanned it, didn't you??</div>
+<div class="flashing-text">You scanned it, didn't you??</div>
 
 <script>
-    const text = document.getElementById('flashingText');
+    const text = document.querySelector('.flashing-text');
     let x = 0, y = 0;
     let dx = 2, dy = 2;
-    const speed = 1; // Adjust speed as necessary
-    
+		let dirX = 1, dirY = 1;
+    const speed = 2; // Increase or decrease the speed of the bouncing
+   	const rect = text.getBoundingClientRect();
+
     function moveText() {
-        const rect = text.getBoundingClientRect();
         
-        if (x + rect.width >= window.innerWidth || x <= 0) {
-            dx = -dx;
-        }
-        if (y + rect.height >= window.innerHeight || y <= 0) {
-            dy = -dy;
-        }
-        
-        x += dx * speed;
-        y += dy * speed;
-        
-        text.style.left = x + 'px';
-        text.style.top = y + 'px';
+				if ((x <= 0) && dirX < 0) dirX = 1
+				if ((x + rect.width >= window.innerWidth) && dirX > 0) dirX = -1
+
+				if ((y <= 0) && dirY < 0) dirY = 1
+				if ((y + rect.height >= window.innerHeight) && dirY > 0) dirY = -1
+
+        x += dx*dirX;
+        y += dy*dirY;
+
+        // Apply the updated position
+        text.style.transform = `translate(${x}px, ${y}px)`;
         
         requestAnimationFrame(moveText);
     }
