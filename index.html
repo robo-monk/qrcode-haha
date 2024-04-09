@@ -24,7 +24,7 @@
         100% { color: red; }
     }
     .flashing-text {
-        font-size: 1em;
+        font-size: 1.5em;
         font-family: 'Courier New', monospace; /* Mimicking hacking aesthetic */
         animation: flashColors 2.1s infinite; /* Flashing colors */
         position: absolute;
@@ -39,8 +39,8 @@
 				bottom: 5%;
 				left: 15%;
     }
-    .flashing-text {
-        font-size: 1em;
+    .get-hakd {
+        font-size: 1.2em;
         font-family: 'Courier New', monospace; /* Mimicking hacking aesthetic */
         animation: flashColors 1.2s infinite; /* Flashing colors */
         position: absolute;
@@ -56,11 +56,10 @@
 <div class="get-hakd">You got hacked</div>
 
 <script>
-		function makeTextBounce(selector) {
+		function makeTextBounce(selector, dirX=1, dirY=1) {
 			const text = document.querySelector(selector);
 			let x = 0, y = 0;
 			let dx = 2, dy = 2;
-			let dirX = 1, dirY = 1;
 			const speed = 2; // Increase or decrease the speed of the bouncing
 			const rect = text.getBoundingClientRect();
 
@@ -84,9 +83,9 @@
 			moveText(); // Start the animation
 		}
 
-		makeTextBounce("flashing-text")
-		makeTextBounce("dont-scan")
-		makeTextBounce("get-hakd")
+		makeTextBounce(".flashing-text", 1, 1)
+		makeTextBounce(".dont-scan", 1, -1)
+		makeTextBounce(".get-hakd", -1, -1)
 </script>
 
 </body>
