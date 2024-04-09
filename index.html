@@ -63,8 +63,8 @@
 
 			function moveText() {
 					const rect = text.getBoundingClientRect();
-					const x = rect.left;
-					const y = rect.top;
+					let x = rect.left;
+					let y = rect.top;
 					
 					if ((x <= 0) && dirX < 0) dirX = 1
 					if ((x + rect.width >= window.innerWidth) && dirX > 0) dirX = -1
