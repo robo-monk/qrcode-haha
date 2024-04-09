@@ -36,16 +36,16 @@
         font-family: 'Courier New', monospace; /* Mimicking hacking aesthetic */
         animation: flashColors .8s infinite; /* Flashing colors */
         position: absolute;
-				bottom: 5%;
-				left: 15%;
+				top: 45%;
+				left: 45%;
     }
     .get-hakd {
         font-size: 1.2em;
         font-family: 'Courier New', monospace; /* Mimicking hacking aesthetic */
         animation: flashColors 1.2s infinite; /* Flashing colors */
         position: absolute;
-				top: 30%;
-				left: 70%;
+				bottom: 10%;
+				right: 15%;
     }
 </style>
 </head>
@@ -58,12 +58,13 @@
 <script>
 		function makeTextBounce(selector, dirX=1, dirY=1) {
 			const text = document.querySelector(selector);
-			let x = 0, y = 0;
 			let dx = 2, dy = 2;
 			const speed = 2; // Increase or decrease the speed of the bouncing
-			const rect = text.getBoundingClientRect();
 
 			function moveText() {
+					const rect = text.getBoundingClientRect();
+					const x = rect.left;
+					const y = rect.top;
 					
 					if ((x <= 0) && dirX < 0) dirX = 1
 					if ((x + rect.width >= window.innerWidth) && dirX > 0) dirX = -1
@@ -83,7 +84,7 @@
 			moveText(); // Start the animation
 		}
 
-		makeTextBounce(".flashing-text", 1, 1)
+		makeTextBounce(".flashing-text", 1, 1, 0, 0)
 		makeTextBounce(".dont-scan", 1, -1)
 		makeTextBounce(".get-hakd", -1, -1)
 </script>
