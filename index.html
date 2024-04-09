@@ -20,49 +20,73 @@
         0% { color: red; }
         25% { color: yellow; }
         50% { color: green; }
-        75% { color: blue; }
+        75% { color: white; }
         100% { color: red; }
     }
     .flashing-text {
         font-size: 1em;
         font-family: 'Courier New', monospace; /* Mimicking hacking aesthetic */
-        animation: flashColors 2s infinite; /* Flashing colors */
+        animation: flashColors 2.1s infinite; /* Flashing colors */
         position: absolute;
 				top: 0;
 				left: 0;
+    }
+    .dont-scan {
+        font-size: 1em;
+        font-family: 'Courier New', monospace; /* Mimicking hacking aesthetic */
+        animation: flashColors .8s infinite; /* Flashing colors */
+        position: absolute;
+				bottom: 5%;
+				left: 15%;
+    }
+    .flashing-text {
+        font-size: 1em;
+        font-family: 'Courier New', monospace; /* Mimicking hacking aesthetic */
+        animation: flashColors 1.2s infinite; /* Flashing colors */
+        position: absolute;
+				top: 30%;
+				left: 70%;
     }
 </style>
 </head>
 <body>
 
 <div class="flashing-text">BING BONG</div>
+<div class="dont-scan">Don't scan random QRs</div>
+<div class="get-hakd">You got hacked</div>
 
 <script>
-    const text = document.querySelector('.flashing-text');
-    let x = 0, y = 0;
-    let dx = 2, dy = 2;
-		let dirX = 1, dirY = 1;
-    const speed = 2; // Increase or decrease the speed of the bouncing
-   	const rect = text.getBoundingClientRect();
+		function makeTextBounce(selector) {
+			const text = document.querySelector(selector);
+			let x = 0, y = 0;
+			let dx = 2, dy = 2;
+			let dirX = 1, dirY = 1;
+			const speed = 2; // Increase or decrease the speed of the bouncing
+			const rect = text.getBoundingClientRect();
 
-    function moveText() {
-        
-				if ((x <= 0) && dirX < 0) dirX = 1
-				if ((x + rect.width >= window.innerWidth) && dirX > 0) dirX = -1
+			function moveText() {
+					
+					if ((x <= 0) && dirX < 0) dirX = 1
+					if ((x + rect.width >= window.innerWidth) && dirX > 0) dirX = -1
 
-				if ((y <= 0) && dirY < 0) dirY = 1
-				if ((y + rect.height >= window.innerHeight) && dirY > 0) dirY = -1
+					if ((y <= 0) && dirY < 0) dirY = 1
+					if ((y + rect.height >= window.innerHeight) && dirY > 0) dirY = -1
 
-        x += dx*dirX;
-        y += dy*dirY;
+					x += dx*dirX;
+					y += dy*dirY;
 
-        // Apply the updated position
-        text.style.transform = `translate(${x}px, ${y}px)`;
-        
-        requestAnimationFrame(moveText);
-    }
-    
-    moveText(); // Start the animation
+					// Apply the updated position
+					text.style.transform = `translate(${x}px, ${y}px)`;
+					
+					requestAnimationFrame(moveText);
+			}
+			
+			moveText(); // Start the animation
+		}
+
+		makeTextBounce("flashing-text")
+		makeTextBounce("dont-scan")
+		makeTextBounce("get-hakd")
 </script>
 
 </body>
