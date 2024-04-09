@@ -32,6 +32,7 @@
 				left: 0;
     }
     .dont-scan {
+				display: none;
         font-size: 1em;
         font-family: 'Courier New', monospace; /* Mimicking hacking aesthetic */
         animation: flashColors .8s infinite; /* Flashing colors */
@@ -40,6 +41,7 @@
 				left: 45%;
     }
     .get-hakd {
+				display: none;
         font-size: 1.2em;
         font-family: 'Courier New', monospace; /* Mimicking hacking aesthetic */
         animation: flashColors 1.2s infinite; /* Flashing colors */
@@ -51,7 +53,7 @@
 </head>
 <body>
 
-<div class="flashing-text">BING BONG</div>
+<div class="flashing-text">BING BONG!\n You got hacked\nDon't scan random QRs </div>
 <div class="dont-scan">Don't scan random QRs</div>
 <div class="get-hakd">You got hacked</div>
 
@@ -85,8 +87,8 @@
 		}
 
 		makeTextBounce(".flashing-text", 1, 1, 0, 0)
-		makeTextBounce(".dont-scan", 1, -1)
-		makeTextBounce(".get-hakd", -1, -1)
+		// makeTextBounce(".dont-scan", 1, -1)
+		// makeTextBounce(".get-hakd", -1, -1)
 </script>
 
 </body>
